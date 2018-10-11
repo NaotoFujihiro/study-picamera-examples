@@ -46,10 +46,10 @@ class FaceDetector(object):
         text = "{} faxes :)".format(num_face)
     cv2.putText(frame,text,(10,100),font,4,(80,129,225),2)
 
-        # 取得した座標情報を元に、cv2.rectangleを使ってframe上に
-        # 顔の位置を描画する
-        for (x,y,w,h) in faces:
-            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,255),2)
+    # 取得した座標情報を元に、cv2.rectangleを使ってframe上に
+    # 顔の位置を描画する
+    for (x,y,w,h) in faces:
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,255),2)
 
-        # frameを戻り値として返す
-        return frame
+    # frameを戻り値として返す
+    return frame
