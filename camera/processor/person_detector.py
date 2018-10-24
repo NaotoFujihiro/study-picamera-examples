@@ -9,15 +9,22 @@ import os
 import sys
 import requests
 
+try:
+	SLACK_URL = os.environ['SLACK_URL']
+	SLACK_TOKEN = os.environ['SLACK_TOKEN']
+	SLACK_CHANNEL = os.environ['SLACK_CHANNEL']
+except KeyError as e:
+	sys.exit('Couldn\'t find env: {}'.format(e))
+
 net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
         '/home/pi/models/MobileNetSSD_deploy.caffemodel')
 
 def upload():
 	image = { 'file': open('hello.jpg', 'rb') }
-	payload= {
+	payload = {
 		'filename': 'hello.jpg',
 		'token': SLACK_TOKEN,
-		'channel': [SLACK_CHANNEL],
+		'channels': [SLACK_CHANNEL],
 	}
 	requests.post(SLACK_URL, params=payload, files=image)
 
@@ -77,11 +84,4 @@ class PersonDetector(object):
             	self.last_upload = time.time()
                 
         return frame
-
-try:
-	SLACK_URL=os.environ['SLACK_URL']
-	SLACK_TOKEN=os.environ['SLACK_TOKEN']
-	SLACK_CHANNEL=os.environ['SLACK_CHANNEL']
-except KeyError as e:
-	sys.exit('Couldn\'t find env: {}'.format(e))
 
