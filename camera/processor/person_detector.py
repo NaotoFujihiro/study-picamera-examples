@@ -22,7 +22,7 @@ net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
 def upload():
 	image = { 'file': open('hello.jpg', 'rb') }
 	payload = {
-		'filename': 'hello.jpg',
+		'filename': 'hello_naoto.jpg',
 		'token': SLACK_TOKEN,
 		'channels': [SLACK_CHANNEL],
 	}
@@ -79,7 +79,7 @@ class PersonDetector(object):
             print('Count: {}'.format(count))
             elapsed = time.time() - self.last_upload
             if elapsed > 60:
-            	cv2.imwrite('hello.jpg', frame)
+            	cv2.imwrite('hello_naoto.jpg', frame)
             	upload()
             	self.last_upload = time.time()
                 
