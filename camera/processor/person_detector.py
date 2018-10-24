@@ -20,11 +20,12 @@ net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
         '/home/pi/models/MobileNetSSD_deploy.caffemodel')
 
 def upload():
-	image = { 'file': open('hello.jpg', 'rb') }
+	image = { 'file': open('hello_naoto.jpg', 'rb') }
 	payload = {
 		'filename': 'hello_naoto.jpg',
 		'token': SLACK_TOKEN,
 		'channels': [SLACK_CHANNEL],
+		'initial_comment': "Hello World!"
 	}
 	requests.post(SLACK_URL, params=payload, files=image)
 
