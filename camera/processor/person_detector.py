@@ -20,9 +20,9 @@ net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
         '/home/pi/models/MobileNetSSD_deploy.caffemodel')
 
 def upload():
-	image = { 'file': open('hello_naoto.jpg', 'rb') }
+	image = { 'file': open('hello.jpg', 'rb') }
 	payload = {
-		'filename': 'hello_naoto.jpg',
+		'filename': 'hello.jpg',
 		'token': SLACK_TOKEN,
 		'channels': [SLACK_CHANNEL],
 		'initial_comment': "Hello World!"
@@ -34,7 +34,7 @@ class PersonDetector(object):
         self.last_upload = time.time()
         self.vs = PiVideoStream(resolution=(800, 608)).start()
         self.flip = flip
-        time.sleep(2.0)
+        time.sleep(10.0)
         
     def __del__(self):
         self.vs.stop()
@@ -80,7 +80,7 @@ class PersonDetector(object):
             print('Count: {}'.format(count))
             elapsed = time.time() - self.last_upload
             if elapsed > 60:
-            	cv2.imwrite('hello_naoto.jpg', frame)
+            	cv2.imwrite('hello.jpg', frame)
             	upload()
             	self.last_upload = time.time()
                 
