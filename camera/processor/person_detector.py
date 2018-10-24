@@ -17,7 +17,7 @@ def upload():
 	payload= {
 		'filename': 'hello.jpg',
 		'token': SLACK_TOKEN,
-		'channel': {SLACK_CHANNEL},
+		'channel': [SLACK_CHANNEL],
 	}
 	requests.post(SLACK_URL, params=payload, files=image)
 
